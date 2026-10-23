@@ -1,4 +1,6 @@
-# feishu-venue-grabber
+# Always-hogging-badminton-courts
+
+> 飞书（Feishu/Lark）场馆预约自动化抢场脚本
 
 基于飞书（Feishu/Lark）桌面客户端的场馆预约自动化脚本。在放场时刻（如每天 0 点）自动完成：打开订场小程序 → 选择场地/日期/时段 → 填写预约原因 → 提交，全程窗口锁定 + 前台校验，绝不误点其他窗口。
 
