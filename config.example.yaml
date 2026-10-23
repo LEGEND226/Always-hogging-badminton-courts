@@ -1,0 +1,127 @@
+# 复制为 config.yaml 后按你的环境修改（config.yaml 已被 .gitignore 排除，不会提交）
+booking:
+  days_ahead: 7            # 抢几天后的场地（放场日当天 00:00:00 开抢）
+  open_time: 00:00:00      # 放场时间
+  pre_fire_ms: 200         # 提前多少毫秒开始点击
+  dry_run: false           # true = 试跑，最后一步提交会自动跳过
+  mode: playwright         # api=HTTP直连（需补全 api 段）; playwright=桌面UI自动化
+preferences:
+- court: 场馆A-1号场地       # 场地名称（仅用于展示/日志）
+  time: 18:00-21:00        # 时段（仅用于展示/日志）
+retry:
+  count: 3
+  interval_ms: 300
+api:
+  base_url: ''             # 直连模式：订场接口地址（抓包获得）
+  headers: {}
+  book_court: {}
+  book_response: {}
+logging:
+  level: INFO
+playwright:
+  mode: desktop
+  headless: false
+  slow_mo_ms: 200
+  timeout_ms: 20000
+  manual_wait_seconds: 15
+  start_url: https://applink.feishu.cn/XXXXXX   # 订场小程序的 applink 短链
+  selectors:
+    app_entry: ''
+    date_input: ''
+    court_by_name: text={court_name}
+    time_by_slot: text={time_slot}
+    submit_button: button:has-text('提交'), button:has-text('预约'), button:has-text('确认')
+    success_indicator: text=预约成功, text=提交成功, text=已预约
+  desktop:
+    auto_launch_feishu: true
+    open_applink: true
+    open_applink_via: client   # client=飞书客户端打开; browser=浏览器
+    lock_window: true
+    foreground_wait_seconds: 15
+    applink_wait_seconds: 25
+    scroll_clicks: -6
+    # xdotool 模糊搜索窗口用关键词（搜索层级，宽匹配）
+    search_keywords:
+    - 预约
+    - 场馆
+    # 0 点前只打开首页，不点预约入口（等新一天刷新）
+    warmup_before_open: true
+    success_window_titles:
+    - 提交成功
+    # 页面内文字 OCR（X11 窗口名与页面标题可能不同）
+    success_use_ocr: true
+    success_ocr_keywords:
+    - 提交成功
+    - 预约成功
+    success_wait_seconds: 5
+    # 等首页「预约入口」画出来再点（防加载中乱点）
+    home_ready_wait_seconds: 12
+    # 严格匹配的目标窗口标题（必须恰好是订场小程序弹窗的标题）
+    target_window_titles:
+    - 订场小程序
+    exclude_window_titles:
+    - 飞书文档
+    - 文档
+    - Docs
+    - doc
+    - Untitled
+    - .docx
+    - 云文档
+    - 消息
+    - 会话
+    - 聊天
+    - Messenger
+    - Inbox
+    - Cursor
+    - Chrome
+    - Firefox
+    - .md
+    - Google Chrome
+    pause_before_clicks: 0.05
+    pause_after_nav: 0.12
+    pause_fast: 0.02
+    skip_last_click_on_dry_run: true
+    skip_last_n_on_dry_run: 1
+    reason_text: 锻炼身体
+    pre_clicks: []
+    # 点击链路用 scripts/record_desktop_clicks.py 录制。
+    # px/py 为相对窗口宽高的比例坐标，rx/ry 为固定像素偏移（可二选一）
+    clicks:
+    - px: 0.5
+      py: 0.4
+      label: 预约入口
+    - px: 0.5
+      py: 0.55
+      label: 场馆A-1号场地
+    - px: 0.9
+      py: 0.26
+      label: 选择预约日期(放场日那天)
+    - action: scroll
+      scroll_clicks: -6
+      label: 下滑露出时段列表
+    - px: 0.57
+      py: 0.54
+      label: 时段18:00
+    - px: 0.55
+      py: 0.60
+      label: 时段19:00
+    - px: 0.5
+      py: 0.66
+      label: 时段20:00
+    - px: 0.46
+      py: 0.72
+      label: 时段21:00
+    - px: 0.48
+      py: 0.95
+      label: 下一步
+    - px: 0.86
+      py: 0.75
+      label: 预约原因输入框
+      paste: 锻炼身体
+    - px: 0.52
+      py: 0.94
+      label: 提交
+    - px: 0.77
+      py: 0.54
+      label: 确定
+    type_text: []

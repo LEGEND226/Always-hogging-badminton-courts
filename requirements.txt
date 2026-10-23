@@ -1,0 +1,18 @@
+requests>=2.31.0
+pyyaml>=6.0
+python-dotenv>=1.0.0
+
+# 抓包工具（可选）
+mitmproxy>=10.0.0
+
+# UI 自动化降级（抓包失败时使用）
+playwright>=1.40.0
+pyautogui>=0.9.54
+pyperclip>=1.8.2
+Pillow>=10.0.0
+pytesseract>=0.3.10
+mss>=9.0.0
+
+# 系统依赖（桌面相对坐标 + 成功页 OCR）:
+#   sudo apt-get install -y xdotool xclip python3-tk python3-dev tesseract-ocr tesseract-ocr-chi_sim
+# 说明：成功页截图用 mss，不再需要 gnome-screenshot

@@ -1,0 +1,17 @@
+.env
+logs/
+captures/
+
+# 真实配置含内部 applink/窗口名，只提交 config.example.yaml
+config.yaml
+config_dryrun.yaml
+
+# 本地界面截图（含内部系统信息）
+assets/
+
+__pycache__/
+*.pyc
+.venv/
+venv/
+.cursor/
+.idea/

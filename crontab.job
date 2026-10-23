@@ -1,0 +1,2 @@
+# feishu-badminton-booking
+59 23 * * * cd /home/zcq/个人文件/jiaoben && DISPLAY=:0 XAUTHORITY=/home/zcq/.Xauthority DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus /usr/bin/python3 main.py --mode playwright >> logs/run.log 2>&1
